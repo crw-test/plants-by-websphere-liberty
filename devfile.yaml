@@ -21,103 +21,23 @@ metadata:
 components:
   - name: dev
     container:
-      image: icr.io/appcafe/websphere-liberty-devfile-stack:{{liberty-version}}
+      image: registry.redhat.io/devspaces/udi-rhel8:latest
+      cpuLimit: 2000m
+      cpuRequest: 500m
       memoryLimit: 1Gi
       mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: cache
+          path: /cache
       endpoints:
         - exposure: public
           path: /
           name: ep1
           targetPort: 9080
           protocol: http
-#
-#deploy components
-#
-  - name: outerloop-build-app
-    image:
-        imageName: "{{CONTAINER_IMAGE}}"
-        dockerfile:
-          uri: ./.devfile/Dockerfile
-          buildContext: ${PROJECTS_ROOT}
-  - name: outerloop-build-stack
-    image:
-       imageName: "{{CONTAINER_IMAGE}}"
-       dockerfile:
-        # eventually should be remote stack based Dockerfile: odo github issue #5450  
-        # ie: 'https://github.com/OpenLiberty/devfile-stack/releases/download/websphere-liberty-maven-0.9.0/Dockerfile'
-        uri: ./.devfile/Dockerfile
-        buildContext: ${PROJECTS_ROOT}  
-  - name: myk8sdeploy
-    kubernetes:
-     uri: 'https://github.com/OpenLiberty/devfile-stack/releases/download/websphere-liberty-maven-0.9.0/app-deploy.yaml' 
-commands:
-  - id: run
-    exec:
-      component: dev
-      commandLine:  echo "run command "; {{mvn-cmd}} -DinstallDirectory=/opt/ibm/wlp -Ddebug=false -DhotTests=true -DcompileWait=3 io.openliberty.tools:liberty-maven-plugin:{{liberty-plugin-version}}:dev
-      workingDir: /projects
-      hotReloadCapable: true
-      group:
-        kind: run
-        isDefault: true
-  - id: run-test-off
-    exec:
-      component: dev
-      commandLine: echo "run-test-off command "; {{mvn-cmd}} -DinstallDirectory=/opt/ibm/wlp -Ddebug=false io.openliberty.tools:liberty-maven-plugin:{{liberty-plugin-version}}:dev
-      workingDir: /projects
-      hotReloadCapable: true
-      group:
-        kind: run
-        isDefault: false
-  - id: debug
-    exec:
-      component: dev
-      commandLine: echo "debug command "; {{mvn-cmd}} -DinstallDirectory=/opt/ibm/wlp -DdebugPort=${DEBUG_PORT} io.openliberty.tools:liberty-maven-plugin:{{liberty-plugin-version}}:dev -Dliberty.env.WLP_DEBUG_REMOTE=y
-      workingDir: /projects
-      hotReloadCapable: true
-      group:
-        kind: debug
-        isDefault: true
-  - id: test
-    # The 'test' command requires an already active container. Multi-module apps require compilation prior to test processing.
-    exec:
-      component: dev
-      commandLine: echo "test command "; {{mvn-cmd}} compiler:compile failsafe:integration-test failsafe:verify
-      workingDir: /projects
-      hotReloadCapable: true
-      group:
-        kind: test
-        isDefault: true
-#
-# Build and Deploy cmds
-#
+  - volume:
+      size: 1G
+    name: cache
 
-  # Build an image using the stack provided dockerfile
-  - id: build-image-stack-provided
-    apply:
-        component: outerloop-build-stack
-  # Build an app image using a developer provided dockerfile
-  - id: build-image-app-provided
-    apply:
-       component: outerloop-build-app
-  # Apply an app image using the stack provided deployment manifest file
-  - id: outerloop-deploy
-    apply:
-       component: myk8sdeploy
-  # Deploy an app image built with the stack provided dockerfile - default action 
-  - id: deploy
-    composite:
-        commands:
-          - build-image-stack-provided
-          - outerloop-deploy
-        group:
-          kind: deploy
-          isDefault: true   
-  # Deploy an app image built with a developer provided dockerfile - non-default action
-  - id: deploy-app-image
-    composite:
-       commands:
-         - build-image-app-provided
-         - outerloop-deploy
-       group:
-         kind: deploy
+
