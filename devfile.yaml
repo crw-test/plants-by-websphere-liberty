@@ -16,35 +16,13 @@
 # limitations under the License.
 schemaVersion: 2.2.0
 metadata:
-  name: java-websphereliberty
-  version: 0.9.0
-  displayName: 'WebSphere Liberty Maven'
-  description: Java application Maven-built stack using the WebSphere Liberty runtime
-  icon: https://raw.githubusercontent.com/OpenLiberty/logos/7fbb132949b9b2589e18c8d5665c1b107028a21d/logomark/svg/OL_logomark.svg
-  tags: ['Java', 'Maven']
-  architectures: ['amd64', 'ppc64le', 's390x']
-  language: 'java'
-  projectType: 'websphereliberty'
-  alpha.build-dockerfile: 'https://github.com/OpenLiberty/devfile-stack/releases/download/websphere-liberty-maven-0.9.0/Dockerfile'
-  alpha.deployment-manifest: 'https://github.com/OpenLiberty/devfile-stack/releases/download/websphere-liberty-maven-0.9.0/app-deploy.yaml'
-starterProjects:
-  - name: rest
-    git:
-      remotes:
-        origin: 'https://github.com/OpenLiberty/devfile-stack-starters.git'
-variables:
-  # Liberty runtime version. Minimum recommended: 21.0.0.9
-  liberty-version: '22.0.0.1'
-  liberty-plugin-version: '3.5.1'
-  mvn-cmd: 'mvn'
-  CONTAINER_IMAGE: 'demo-image:0'
-  COMPONENT_NAME: 'demo-app'
+  name: pbw-liberty
+  version: 0.1.0
 components:
   - name: dev
     container:
-      # In the original upstream of this devfile, the image used is openliberty/devfile-stack:<x.y.z>, which is built from the repository: https://github.com/OpenLiberty/devfile-stack
       image: icr.io/appcafe/websphere-liberty-devfile-stack:{{liberty-version}}
-      memoryLimit: 768Mi
+      memoryLimit: 1Gi
       mountSources: true
       endpoints:
         - exposure: public
@@ -59,7 +37,7 @@ components:
     image:
         imageName: "{{CONTAINER_IMAGE}}"
         dockerfile:
-          uri: ./Dockerfile
+          uri: ./.devfile/Dockerfile
           buildContext: ${PROJECTS_ROOT}
   - name: outerloop-build-stack
     image:
@@ -67,7 +45,7 @@ components:
        dockerfile:
         # eventually should be remote stack based Dockerfile: odo github issue #5450  
         # ie: 'https://github.com/OpenLiberty/devfile-stack/releases/download/websphere-liberty-maven-0.9.0/Dockerfile'
-        uri: ./Dockerfile
+        uri: ./.devfile/Dockerfile
         buildContext: ${PROJECTS_ROOT}  
   - name: myk8sdeploy
     kubernetes:
