@@ -21,7 +21,7 @@ metadata:
 components:
   - name: dev
     container:
-      image: icr.io/appcafe/websphere-liberty:full-java21-openj9-ubi-minimal
+      image: registry.redhat.io/devspaces/udi-rhel8:latest
       cpuLimit: 2000m
       cpuRequest: 500m
       memoryLimit: 1Gi
