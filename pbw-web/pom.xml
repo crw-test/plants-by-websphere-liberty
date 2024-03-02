@@ -42,15 +42,22 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-				 <source>1.6</source>
-				 <target>1.8</target>
-			 </configuration>
-		 </plugin>
+<!--
+					<source>1.6</source>
+					<target>1.8</target>
+-->
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+<!--
 				<version>2.1</version>
+-->
+				<version>3.3.2</version>
 				<configuration>
 					<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
 					<warName>pbw-web</warName>
@@ -69,6 +76,12 @@
 					<doctitle>PlantsByWebSphere Util library</doctitle>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>io.openliberty.tools</groupId>
+				<artifactId>liberty-maven-plugin</artifactId>
+				<version>3.7.1</version>
+			</plugin>
+
 		</plugins>
 	</reporting>
 </project>
