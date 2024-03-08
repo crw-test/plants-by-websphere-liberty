@@ -21,7 +21,8 @@ metadata:
 components:
   - name: dev
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8:latest
+      image: ghcr.io/tatsuya-ibm/semeru-17-devspaces:1
+#      image: registry.redhat.io/devspaces/udi-rhel8:latest
 #      image: ibm-semeru-runtimes:open-17.0.10_7-jre-centos7
       cpuLimit: 2000m
       cpuRequest: 500m
