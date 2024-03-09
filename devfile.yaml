@@ -40,7 +40,7 @@ components:
           protocol: http
       env:
         - name: KUBEDOCK_ENABLED
-          value: true
+          value: TRUE
   - volume:
       size: 1G
     name: cache
