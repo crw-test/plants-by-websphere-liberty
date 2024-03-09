@@ -38,6 +38,9 @@ components:
           name: ep1
           targetPort: 9080
           protocol: http
+      env:
+        - name: KUBEDOCK_ENABLED
+          value: true
   - volume:
       size: 1G
     name: cache
