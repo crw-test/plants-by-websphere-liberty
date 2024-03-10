@@ -32,8 +32,6 @@ components:
       volumeMounts:
         - name: cache
           path: /cache
-        - name: m2
-          path: /home/user/.m2
       endpoints:
         - exposure: public
           path: /
