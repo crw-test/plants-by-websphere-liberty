@@ -38,15 +38,6 @@ components:
           name: ep1
           targetPort: 9080
           protocol: http
-      env:
-        - name: DB_HOST
-          value: 162.133.133.180
-        - name: DB_PORT
-          value: 25010
-        - name: DB_USER
-          value: db2inst1
-        - name: DB_PASSWORD
-          value: P7rxJbtA
   - name: cache
     volume:
       size: 1G
