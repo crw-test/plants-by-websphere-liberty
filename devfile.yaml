@@ -29,9 +29,9 @@ components:
       memoryLimit: 1Gi
       mountSources: true
       sourceMapping: /projects
-      volumeMounts:
-        - name: cache
-          path: /cache
+#      volumeMounts:
+#        - name: cache
+#          path: /cache
       endpoints:
         - exposure: public
           path: /
