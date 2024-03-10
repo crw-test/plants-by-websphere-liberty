@@ -29,20 +29,22 @@ components:
       memoryLimit: 1Gi
       mountSources: true
       sourceMapping: /projects
-#      volumeMounts:
-#        - name: cache
-#          path: /cache
+      volumeMounts:
+        - name: cache
+          path: /cache
+        - name: m2
+          path: /home/user/.m2
       endpoints:
         - exposure: public
           path: /
           name: ep1
           targetPort: 9080
           protocol: http
-      env:
-        - name: KUBEDOCK_ENABLED
-          value: 'true'
-  - volume:
+#      env:
+#        - name: KUBEDOCK_ENABLED
+#          value: 'true'
+  - name: cahce
+    volume:
       size: 1G
-    name: cache
 
 
