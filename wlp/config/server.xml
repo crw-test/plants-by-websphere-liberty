@@ -17,36 +17,9 @@
 <feature>el-3.0</feature>
 </featureManager>
 <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
-<!-- <variable name="MARIADB_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mariadb/" />
-<jdbcDriver id="MariaDB-1.7.4" javax.sql.DataSource="org.mariadb.jdbc.MariaDbPoolDataSource">
-        <library>
-            <file name="${MARIADB_JDBC_DRIVER_PATH}/mariadb-java-client-1.7.4.jar"/>
-        </library>
-    </jdbcDriver>
-<dataSource id="MariaDB JTA for Plants by WebSphere" jdbcDriverRef="MariaDB-1.7.4" jndiName="jdbc/PlantsByWebSphereMariaDBDataSource">
-        <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
-        <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
-    </dataSource>
-    <dataSource id="Non JTA MariaDB for Plants By WebSphere" jdbcDriverRef="MariaDB-1.7.4" jndiName="jdbc/PlantsByWebSphereMariaDBDataSourceNONJTA">
-        <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}"/>
-        <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
-    </dataSource> -->
-
-<!--
-<variable name="MYSQL_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mysql/" />
-<jdbcDriver id="MySQL 5.1.38.1" javax.sql.DataSource="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
-    <library>
-        <file name="${MYSQL_JDBC_DRIVER_PATH}/mysql-connector-java-5.1.38.jar"/>
-    </library>
-</jdbcDriver>
-
-<dataSource id="MySQL JTA for Plants by WebSphere" jdbcDriverRef="MySQL 5.1.38.1" jndiName="jdbc/PlantsByWebSphereMySQLDataSource">
-            <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}" relaxAutoCommit="false"/>
-            <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
-</dataSource>
--->
 
 <!-- JDBC Definition (Db2) -->
+<!--
 <jdbcDriver id="db2-driver" libraryRef="db2-liberty"/>
 <library id="db2-liberty">
     <fileset dir="${wlp.user.dir}/shared/resources/Db2" id="db2-fileset"/>
@@ -54,9 +27,9 @@
 <dataSource id="Db2 JTA for Plants by WebSphere" jdbcDriverRef="db2-driver" jndiName="jdbc/PlantsByWebSphereDataSource" type="javax.sql.DataSource" transactional="false">
     <properties.db2.jcc databaseName="plantsdb" password="${env.DB_PASSWORD}" serverName="${env.DB_HOST}" user="${env.DB_USER}" portNumber="${env.DB_PORT}"/>
 </dataSource>
+-->
 
 <!-- JDBC Definition (MySQL) -->
-<!--
 <variable name="MYSQL_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mysql/" />
 <jdbcDriver id="MySQL 5.1.38.1" javax.sql.DataSource="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
     <library>
@@ -67,7 +40,6 @@
     <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}" relaxAutoCommit="false"/>
     <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
 </dataSource>
--->
 
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">
         <property name="mail.imap.host" value="impa.gmail.com"/>
