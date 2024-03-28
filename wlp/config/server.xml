@@ -19,7 +19,6 @@
 <httpEndpoint host="*" httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"/>
 
 <!-- JDBC Definition (Db2) -->
-<!--
 <jdbcDriver id="db2-driver" libraryRef="db2-liberty"/>
 <library id="db2-liberty">
     <fileset dir="${wlp.user.dir}/shared/resources/Db2" id="db2-fileset"/>
@@ -27,9 +26,9 @@
 <dataSource id="Db2 JTA for Plants by WebSphere" jdbcDriverRef="db2-driver" jndiName="jdbc/PlantsByWebSphereDataSource" type="javax.sql.DataSource" transactional="false">
     <properties.db2.jcc databaseName="plantsdb" password="${env.DB_PASSWORD}" serverName="${env.DB_HOST}" user="${env.DB_USER}" portNumber="${env.DB_PORT}"/>
 </dataSource>
--->
 
 <!-- JDBC Definition (MySQL) -->
+<!--
 <variable name="MYSQL_JDBC_DRIVER_PATH" value="/opt/ibm/wlp/usr/shared/resources/mysql/" />
 <jdbcDriver id="MySQL 5.1.38.1" javax.sql.DataSource="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
     <library>
@@ -40,6 +39,7 @@
     <properties databaseName="plantsdb" password="${env.DB_PASSWORD}" portNumber="${env.DB_PORT}" serverName="${env.DB_HOST}" user="${env.DB_USER}" relaxAutoCommit="false"/>
     <connectionManager agedTimeout="0" connectionTimeout="180" maxIdleTime="1800" maxPoolSize="10" minPoolSize="1" reapTime="180"/>
 </dataSource>
+-->
 
 <mailSession description="" from="" jndiName="mail/PlantsByWebSphere" mailSessionID="PlantsbyWebSphere" user="foo" password="bar" host="localhost">
         <property name="mail.imap.host" value="impa.gmail.com"/>
