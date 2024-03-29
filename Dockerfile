@@ -16,10 +16,10 @@ RUN chown 1001:0 /opt/ibm/wlp/usr/shared/resources/mysql/*.jar
 USER 1001
 
 # CONFIG: Add in server.xml
-#COPY wlp/config/server.xml /config
-#USER root
-#RUN chown 1001:0 /config/server.xml
-#USER 1001
+COPY wlp/config/server.xml /config
+USER root
+RUN chown 1001:0 /config/server.xml
+USER 1001
 
 RUN configure.sh
 
